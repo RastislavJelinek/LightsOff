@@ -10,34 +10,30 @@ public class Field {
     private GameState state;
     private final int rowCount,columnCount;
     private int level;
-    private final Tile[][] gameField;
+    private final Tile[][] map;
 
     public Field(int rowCount, int columnCount){
         this.columnCount = columnCount;
         this.rowCount = rowCount;
         level = 1;
-        gameField = new Tile[rowCount][columnCount];
+        map = new Tile[rowCount][columnCount];
     }
 
     public void generate(){
         state = GameState.PLAYING;
-        for(int i = 0; i < rowCount; ++i){
-            for(int a = 0; a < columnCount; ++a){
-                gameField[i][a] = new Tile();
-            }
-        }
-        do {
-            for (int i = 0; i < level; ++i) {
-                int row = ThreadLocalRandom.current().nextInt(0, rowCount);
-                int column = ThreadLocalRandom.current().nextInt(0, columnCount);
-                switchTile(row, column);
-            }
-        }while (isSolved());
+        for(int i = 0; i < rowCount; ++i)
+            for (int a = 0; a < columnCount; ++a) map[i][a] = new Tile();
+
+        do for (int i = 0; i < level; ++i) {
+            int row = ThreadLocalRandom.current().nextInt(0, rowCount);
+            int column = ThreadLocalRandom.current().nextInt(0, columnCount);
+            switchTile(row, column);
+        } while (isSolved());
     }
 
     public void switchTile(int row, int column){
-        if(!inRange(row, 0, rowCount))return;
-        if(!inRange(column, 0, columnCount))return;
+        if(!inRange(row, 0, rowCount - 1))return;
+        if(!inRange(column, 0, columnCount - 1))return;
         switchTileState(row, column);
 
         switchTileState(row + 1, column);
@@ -48,13 +44,13 @@ public class Field {
     }
 
     private void switchTileState(int row, int column){
-        if(!inRange(row, 0, rowCount))return;
-        if(!inRange(column, 0, columnCount))return;
-        gameField[row][column].toggleState();
+        if(!inRange(row, 0, rowCount - 1))return;
+        if(!inRange(column, 0, columnCount - 1))return;
+        map[row][column].toggleState();
     }
     
-    private boolean isSolved(){
-        boolean isSolved = Arrays.stream(gameField).noneMatch((Tile[] a) -> Arrays.stream(a).anyMatch(t -> t.getState().equals(LIGHT_ON)));
+    public boolean isSolved(){
+        boolean isSolved = Arrays.stream(map).noneMatch((Tile[] a) -> Arrays.stream(a).anyMatch(t -> t.getState().equals(LIGHT_ON)));
         if(isSolved) {
             ++level;
             state = GameState.SOLVED;
@@ -66,8 +62,8 @@ public class Field {
         return state;
     }
 
-    public Tile[][] getGameField() {
-        return gameField;
+    public Tile[][] getMap() {
+        return map;
     }
     public int getRowCount() {
         return rowCount;
