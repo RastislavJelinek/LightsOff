@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static lightsOff.core.GameState.PLAYING;
 import static lightsOff.core.GameState.SOLVED;
-import static lightsOff.core.MathUtil.inRange;
+import static lightsOff.math.MathUtil.inRange;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FieldTest {

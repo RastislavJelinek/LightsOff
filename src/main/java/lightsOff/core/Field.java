@@ -3,7 +3,7 @@ package lightsOff.core;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static lightsOff.core.MathUtil.inRange;
+import static lightsOff.math.MathUtil.inRange;
 import static lightsOff.core.TileState.LIGHT_ON;
 
 public class Field {
