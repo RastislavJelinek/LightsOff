@@ -1,4 +1,4 @@
-package lightsOff.core;
+package lightsOff.math;
 
 public class MathUtil {
     public static boolean inRange(int x, int min, int max)
