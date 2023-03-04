@@ -41,7 +41,7 @@ public class ConsoleUi {
     }
 
     private void show(){
-        Tile[][] gameField = field.getGameField();
+        Tile[][] gameField = field.getMap();
         System.out.println("level: " + field.getLevel());
         System.out.print("  ");
         for(int i = 0; i < field.getColumnCount(); ++i){
