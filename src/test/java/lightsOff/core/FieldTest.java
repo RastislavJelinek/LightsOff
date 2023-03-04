@@ -20,7 +20,8 @@ class FieldTest {
         for(int i = 0; i < field.getRowCount(); ++i){
             for(int a = 0; a < field.getColumnCount(); ++a){
                 clone[i][a] = new Tile();
-                clone[i][a].setState(gameField[i][a].getState());
+                if(gameField[i][a].getState() == TileState.LIGHT_ON)
+                    clone[i][a].toggleState();
             }
         }
 
@@ -90,7 +91,8 @@ class FieldTest {
         Tile[][] gameField = field.getMap();
         for(int i = 0; i < field.getRowCount(); ++i){
             for(int a = 0; a < field.getColumnCount(); ++a){
-                gameField[i][a].setState(TileState.LIGHT_OFF);
+                if(gameField[i][a].getState() == TileState.LIGHT_ON)
+                    gameField[i][a].toggleState();
             }
         }
         assertTrue(field.isSolved());
@@ -101,7 +103,8 @@ class FieldTest {
         Tile[][] gameField = field.getMap();
         for(int i = 0; i < field.getRowCount(); ++i){
             for(int a = 0; a < field.getColumnCount(); ++a){
-                gameField[i][a].setState(TileState.LIGHT_OFF);
+                if(gameField[i][a].getState() == TileState.LIGHT_ON)
+                    gameField[i][a].toggleState();
             }
         }
         field.isSolved();
@@ -113,7 +116,8 @@ class FieldTest {
         Tile[][] gameField = field.getMap();
         for(int i = 0; i < field.getRowCount(); ++i){
             for(int a = 0; a < field.getColumnCount(); ++a){
-                gameField[i][a].setState(TileState.LIGHT_OFF);
+                if(gameField[i][a].getState() == TileState.LIGHT_ON)
+                    gameField[i][a].toggleState();
             }
         }
         field.isSolved();
