@@ -1,7 +1,7 @@
-package lightsOff;
+package sk.tuke.gamestudio.lightsOff;
 
-import lightsOff.consoleUi.ConsoleUi;
-import lightsOff.core.Field;
+import sk.tuke.gamestudio.lightsOff.consoleUi.ConsoleUi;
+import sk.tuke.gamestudio.lightsOff.core.Field;
 
 public class LightsOff {
     public static void main(String[] args) {

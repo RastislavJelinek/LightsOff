@@ -1,10 +1,9 @@
-package lightsOff.core;
+package sk.tuke.gamestudio.lightsOff.core;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static lightsOff.math.MathUtil.inRange;
-import static lightsOff.core.TileState.LIGHT_ON;
+import static sk.tuke.gamestudio.lightsOff.math.MathUtil.inRange;
 
 public class Field {
     private GameState state;
@@ -50,7 +49,7 @@ public class Field {
     }
     
     public boolean isSolved(){
-        boolean isSolved = Arrays.stream(map).noneMatch((Tile[] a) -> Arrays.stream(a).anyMatch(t -> t.getState().equals(LIGHT_ON)));
+        boolean isSolved = Arrays.stream(map).noneMatch((Tile[] a) -> Arrays.stream(a).anyMatch(t -> t.getState().equals(TileState.LIGHT_ON)));
         if(isSolved) {
             ++level;
             state = GameState.SOLVED;

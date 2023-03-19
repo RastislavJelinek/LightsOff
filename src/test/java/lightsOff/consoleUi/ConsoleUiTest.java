@@ -1,6 +1,7 @@
 package lightsOff.consoleUi;
 
-import lightsOff.core.Field;
+import sk.tuke.gamestudio.lightsOff.consoleUi.ConsoleUi;
+import sk.tuke.gamestudio.lightsOff.core.Field;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -2,10 +2,13 @@ package lightsOff.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sk.tuke.gamestudio.lightsOff.core.Field;
+import sk.tuke.gamestudio.lightsOff.core.Tile;
+import sk.tuke.gamestudio.lightsOff.core.TileState;
 
-import static lightsOff.core.GameState.PLAYING;
-import static lightsOff.core.GameState.SOLVED;
-import static lightsOff.math.MathUtil.inRange;
+import static sk.tuke.gamestudio.lightsOff.core.GameState.PLAYING;
+import static sk.tuke.gamestudio.lightsOff.core.GameState.SOLVED;
+import static sk.tuke.gamestudio.lightsOff.math.MathUtil.inRange;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FieldTest {

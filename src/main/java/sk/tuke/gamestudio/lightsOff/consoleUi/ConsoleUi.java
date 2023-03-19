@@ -1,13 +1,12 @@
-package lightsOff.consoleUi;
+package sk.tuke.gamestudio.lightsOff.consoleUi;
 
-import lightsOff.core.Field;
-import lightsOff.core.GameState;
-import lightsOff.core.Tile;
+import sk.tuke.gamestudio.lightsOff.core.Field;
+import sk.tuke.gamestudio.lightsOff.core.GameState;
+import sk.tuke.gamestudio.lightsOff.core.Tile;
+import sk.tuke.gamestudio.lightsOff.core.TileState;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
-import static lightsOff.core.TileState.LIGHT_ON;
 
 public class ConsoleUi {
 
@@ -51,7 +50,7 @@ public class ConsoleUi {
 
         Arrays.stream(gameField).forEach((Tile[] a) -> {
             System.out.print(counter + " ");
-            Arrays.stream(a).forEach(t -> System.out.print((t.getState().equals(LIGHT_ON) ? "X" : "O") + " ") );
+            Arrays.stream(a).forEach(t -> System.out.print((t.getState().equals(TileState.LIGHT_ON) ? "X" : "O") + " ") );
             System.out.println();
             ++counter;
         });
