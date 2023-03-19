@@ -8,9 +8,9 @@ import java.util.List;
 
 
 public class ScoreServiceJDBC implements ScoreService {
-    public static final String URL = "jdbc:postgresql://localhost/gamestudio";
+    public static final String URL = "jdbc:postgresql://localhost/lightsOff";
     public static final String USER = "postgres";
-    public static final String PASSWORD = "postgres";
+    public static final String PASSWORD = "32923292";
     public static final String SELECT = "SELECT game, player, points, playedOn FROM score WHERE game = ? ORDER BY points DESC LIMIT 10";
     public static final String DELETE = "DELETE FROM score";
     public static final String INSERT = "INSERT INTO score (game, player, points, playedOn) VALUES (?, ?, ?, ?)";
