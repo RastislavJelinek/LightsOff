@@ -1,38 +1,23 @@
 package sk.tuke.gamestudio.entity;
 
 
+import sk.tuke.gamestudio.lightsOff.math.MathUtil;
+import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
+
 import java.util.Date;
 
-public class Rating {
-    private String game;
-
-    private String player;
+public class Rating extends Entity {
 
     private int rating;
 
     private Date ratedOn;
 
-    public Rating(String game, String player, int points, Date playedOn) {
-        this.game = game;
-        this.player = player;
-        this.rating = points;
-        this.ratedOn = playedOn;
-    }
-
-    public String getGame() {
-        return game;
-    }
-
-    public void setGame(String game) {
-        this.game = game;
-    }
-
-    public String getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(String player) {
-        this.player = player;
+    public Rating(String game, String player, int rating, Date ratedOn) throws OutOfRangeException {
+        super(game,player);
+        boolean b = MathUtil.inRange(rating, 1, 5);
+        if(!b)throw new OutOfRangeException("rating is out of range");
+        this.rating = rating;
+        this.ratedOn = ratedOn;
     }
 
     public int getRating() {
@@ -54,10 +39,10 @@ public class Rating {
     @Override
     public String toString() {
         return "Score{" +
-                "game='" + game + '\'' +
-                ", player='" + player + '\'' +
-                ", points=" + rating +
-                ", playedOn=" + ratedOn +
+                "game='" + getGame() + '\'' +
+                ", player='" + getPlayer() + '\'' +
+                ", points=" + getRating() +
+                ", playedOn=" + getRatedOn() +
                 '}';
     }
 }

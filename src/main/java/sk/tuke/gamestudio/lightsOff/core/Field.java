@@ -9,16 +9,19 @@ public class Field {
     private GameState state;
     private final int rowCount,columnCount;
     private int level;
+    private int moveCounter;
     private final Tile[][] map;
 
     public Field(int rowCount, int columnCount){
         this.columnCount = columnCount;
         this.rowCount = rowCount;
-        level = 1;
+        level = 0;
+        moveCounter = 0;
         map = new Tile[rowCount][columnCount];
     }
 
     public void generate(){
+        int k = moveCounter;
         state = GameState.PLAYING;
         for(int i = 0; i < rowCount; ++i)
             for (int a = 0; a < columnCount; ++a) map[i][a] = new Tile();
@@ -28,11 +31,13 @@ public class Field {
             int column = ThreadLocalRandom.current().nextInt(0, columnCount);
             switchTile(row, column);
         } while (isSolved());
+        moveCounter = k;
     }
 
     public void switchTile(int row, int column){
         if(!inRange(row, 0, rowCount - 1))return;
         if(!inRange(column, 0, columnCount - 1))return;
+        ++moveCounter;
         switchTileState(row, column);
 
         switchTileState(row + 1, column);
@@ -51,10 +56,21 @@ public class Field {
     public boolean isSolved(){
         boolean isSolved = Arrays.stream(map).noneMatch((Tile[] a) -> Arrays.stream(a).anyMatch(t -> t.getState().equals(TileState.LIGHT_ON)));
         if(isSolved) {
-            ++level;
             state = GameState.SOLVED;
         }
         return isSolved;
+    }
+
+    public int getScore(){
+        int levelSum = 0;
+        for(int i = 0; i <= level; ++i){
+            levelSum = levelSum + i;
+        }
+
+        return levelSum - moveCounter;
+    }
+    public void nextLevel(){
+        ++level;
     }
 
     public GameState getState() {
