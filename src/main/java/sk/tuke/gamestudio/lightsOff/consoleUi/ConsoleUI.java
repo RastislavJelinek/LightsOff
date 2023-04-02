@@ -1,5 +1,6 @@
 package sk.tuke.gamestudio.lightsOff.consoleUi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Rating;
 import sk.tuke.gamestudio.entity.Score;
@@ -10,20 +11,32 @@ import sk.tuke.gamestudio.lightsOff.core.TileState;
 import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
 import sk.tuke.gamestudio.service.CommentServiceJDBC;
 import sk.tuke.gamestudio.service.RatingServiceJDBC;
+import sk.tuke.gamestudio.service.ScoreService;
 import sk.tuke.gamestudio.service.ScoreServiceJDBC;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ConsoleUi {
+public class ConsoleUI {
 
     Field field;
     private int counter = 0;
 
+    @Autowired
+    private ScoreService scoreService;
 
-    public void play(Field field) {
+
+    public ConsoleUI(Field field, ScoreService scoreService) {
         this.field = field;
+        this.scoreService = scoreService;
+    }
+
+    public ConsoleUI(Field field) {
+        this.field = field;
+    }
+
+    public void play() {
         Scanner myInput = new Scanner( System.in );
         do {
             field.nextLevel();
