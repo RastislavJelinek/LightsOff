@@ -9,10 +9,7 @@ import sk.tuke.gamestudio.lightsOff.core.GameState;
 import sk.tuke.gamestudio.lightsOff.core.Tile;
 import sk.tuke.gamestudio.lightsOff.core.TileState;
 import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
-import sk.tuke.gamestudio.service.CommentServiceJDBC;
-import sk.tuke.gamestudio.service.RatingServiceJDBC;
-import sk.tuke.gamestudio.service.ScoreService;
-import sk.tuke.gamestudio.service.ScoreServiceJDBC;
+import sk.tuke.gamestudio.service.*;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -25,11 +22,17 @@ public class ConsoleUI {
 
     @Autowired
     private ScoreService scoreService;
+    @Autowired
+    private  RatingService ratingService;
+    @Autowired
+    private CommentService commentService;
 
 
-    public ConsoleUI(Field field, ScoreService scoreService) {
+    public ConsoleUI(Field field, ScoreService scoreService, RatingService ratingService, CommentService commentService) {
         this.field = field;
         this.scoreService = scoreService;
+        this.ratingService = ratingService;
+        this.commentService = commentService;
     }
 
     public ConsoleUI(Field field) {
@@ -56,16 +59,15 @@ public class ConsoleUI {
         System.out.print("your name?:");
         String name = myInput.next();
         field.nextLevel();
-        ScoreServiceJDBC scoreServiceJDBC = new ScoreServiceJDBC();
 
-        scoreServiceJDBC.addScore(new Score("lightsOff",name,field.getScore(),new Date()));
+        scoreService.addScore(new Score("lightsOff",name,field.getScore(),new Date()));
         ColorPrint.println("congratulation " + name + "! your score is: " + field.getScore(),ColorPrint.ANSI_PURPLE);
 
 
 
         System.out.print("want to see TOP 10 score? / no (y/n):");
         if(myInput.next().equals("y")){
-            scoreServiceJDBC.getTopScores("lightsOff").forEach(t ->ColorPrint.println(t.toString(),ColorPrint.ANSI_PURPLE));
+            scoreService.getTopScores("lightsOff").forEach(t ->ColorPrint.println(t.toString(),ColorPrint.ANSI_PURPLE));
         }
 
         commentAction(myInput, name);
@@ -80,21 +82,20 @@ public class ConsoleUI {
         do {
         System.out.print("want to leave rating? / see average rating? / see your previous rating? / no (l/a/p/n):");
         ratingActionChooser = myInput.next();
-        RatingServiceJDBC ratingServiceJDBC = new RatingServiceJDBC();
         switch (ratingActionChooser) {
             case "l" -> {
                 do
                     try {
                         System.out.print("give rating(1-5): ");
-                        ratingServiceJDBC.setRating(new Rating("lightsOff", name, myInput.nextInt(), new Date()));
+                        ratingService.setRating(new Rating("lightsOff", name, myInput.nextInt(), new Date()));
                         break;
                     } catch (OutOfRangeException e) {
                         System.err.println("rating not in range 1 - 5");
                     }
                 while(true);
             }
-            case "a" -> ColorPrint.println("Average rating of this game: "+ ratingServiceJDBC.getAverageRating("lightsOff"),ColorPrint.ANSI_PURPLE);
-            case "p" -> ColorPrint.println("Your previous rating: "+ ratingServiceJDBC.getRating("lightsOff", name),ColorPrint.ANSI_PURPLE);
+            case "a" -> ColorPrint.println("Average rating of this game: "+ ratingService.getAverageRating("lightsOff"),ColorPrint.ANSI_PURPLE);
+            case "p" -> ColorPrint.println("Your previous rating: "+ ratingService.getRating("lightsOff", name),ColorPrint.ANSI_PURPLE);
         }
         }while(ratingActionChooser.equals("l") || ratingActionChooser.equals("a") || ratingActionChooser.equals("p"));
     }
@@ -104,17 +105,17 @@ public class ConsoleUI {
         do {
             System.out.print("want to leave comment? / see most recent comments? / no (l/s/n):");
             commentActionChooser = myInput.next();
-            CommentServiceJDBC commentServiceJDBC = new CommentServiceJDBC();
+            myInput.nextLine(); // consume leftover newline
             switch (commentActionChooser) {
                 case "l" -> {
                     String comment;
                     do {
                         System.out.print("your comment(must be less then 300 characters): ");
-                        comment = myInput.next();
+                        comment = myInput.nextLine();
                     } while (comment.length() > 300);
-                    commentServiceJDBC.addComment(new Comment("lightsOff", name, comment, new Date()));
+                    commentService.addComment(new Comment("lightsOff", name, comment, new Date()));
                 }
-                case "s" -> commentServiceJDBC.getComments("lightsOff").forEach(t -> ColorPrint.println(t.toString(), ColorPrint.ANSI_PURPLE));
+                case "s" -> commentService.getComments("lightsOff").forEach(t -> ColorPrint.println(t.toString(), ColorPrint.ANSI_PURPLE));
             }
         }while(commentActionChooser.equals("l") || commentActionChooser.equals("s"));
     }
