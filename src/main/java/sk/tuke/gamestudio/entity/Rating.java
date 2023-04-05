@@ -1,13 +1,11 @@
 package sk.tuke.gamestudio.entity;
 
 
+import org.hibernate.annotations.Table;
 import sk.tuke.gamestudio.lightsOff.math.MathUtil;
 import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
