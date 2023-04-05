@@ -19,7 +19,7 @@ public class CommentServiceJPA implements CommentService {
 
     @Override
     public List<Comment> getComments(String game){
-        return entityManager.createNamedQuery("Comment.getRecentComments")
+        return entityManager.createNamedQuery("Comment.getRecentComments",Comment.class)
                 .setParameter("game", game).setMaxResults(10).getResultList();
     }
 
