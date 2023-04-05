@@ -11,8 +11,7 @@ import java.util.Objects;
 public class ScoreServiceRestClient implements ScoreService {
     private final String url = "http://localhost:8080/api/score";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public void addScore(Score score) {

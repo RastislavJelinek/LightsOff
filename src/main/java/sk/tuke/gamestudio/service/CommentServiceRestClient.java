@@ -12,8 +12,7 @@ public class CommentServiceRestClient implements CommentService{
 
     private final String url = "http://localhost:8080/api/comment";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public void addComment(Comment comment){
