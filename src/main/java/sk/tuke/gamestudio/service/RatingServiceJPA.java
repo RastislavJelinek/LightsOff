@@ -13,19 +13,35 @@ public class RatingServiceJPA implements RatingService{
     private EntityManager entityManager;
     @Override
     public void setRating(Rating rating) {
-        entityManager.persist(rating);
+        entityManager.merge(rating);
     }
 
     @Override
     public int getAverageRating(String game){
-        return entityManager.createNamedQuery("Rating.getAverageRating",int.class)
-                .setParameter("game", game).getSingleResult();
+        try {
+            Double game1 = entityManager.createNamedQuery("Rating.getAverageRating", Double.class)
+                    .setParameter("game", game)
+                    .getSingleResult();
+            return game1.intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // or some other default value
+        }
     }
 
     @Override
     public int getRating(String game, String player) {
-        return entityManager.createNamedQuery("Rating.getRating",int.class)
-                .setParameter("game", game).getSingleResult();
+        try {
+            Rating rating = entityManager.createNamedQuery("Rating.getRating", Rating.class)
+                    .setParameter("game", game)
+                    .setParameter("player", player)
+                    .getSingleResult();
+            return rating.getRating();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // or some other default value
+        }
+
     }
 
     @Override

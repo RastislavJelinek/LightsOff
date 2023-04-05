@@ -12,11 +12,11 @@ import java.io.Serializable;
 import java.util.Date;
 @Entity
 @NamedQuery( name = "Rating.getRating",
-        query = "SELECT r FROM Rating r WHERE r.game =: game AND r.player =: player")
+        query = "SELECT r FROM Rating r WHERE r.game =: game AND r.player =: player ")
 @NamedQuery( name = "Rating.getAverageRating",
-        query = "SELECT AVG(r) FROM Rating r WHERE r.game =: game ")
+        query = "SELECT AVG(r.rating) FROM Rating r WHERE r.game =: game")
 @NamedQuery( name = "Rating.resetRating",
-        query = "DELETE FROM Score")
+        query = "DELETE FROM Rating")
 public class Rating implements Serializable {
 
     @Id

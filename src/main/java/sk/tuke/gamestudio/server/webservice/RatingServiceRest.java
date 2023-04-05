@@ -16,7 +16,7 @@ public class RatingServiceRest {
         this.ratingService = ratingService;
     }
 
-    @GetMapping("/{game}" + "/{player}")
+    @GetMapping("/{game}/{player}")
     public int getRating(@PathVariable String game,@PathVariable String player) {
         return ratingService.getRating(game,player);
     }

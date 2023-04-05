@@ -10,8 +10,7 @@ public class RatingServiceRestClient implements RatingService{
 
     private final String url = "http://localhost:8080/api/rating";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public void setRating(Rating rating){
@@ -25,7 +24,7 @@ public class RatingServiceRestClient implements RatingService{
 
     @Override
     public int getRating(String game, String player){
-        return Objects.requireNonNull(restTemplate.getForObject(url + "/" + game + player, int.class));
+        return Objects.requireNonNull(restTemplate.getForObject(url +"/" + game +"/"+ player, int.class));
     }
 
     @Override
