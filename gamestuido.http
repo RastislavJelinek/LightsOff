@@ -1,1 +1,11 @@
+### GET top 10 score
 GET http://localhost:8080/api/score/lightsOff
+
+### GET Average Rating
+GET http://localhost:8080/api/rating/lightsOff
+
+### GET Rating of player
+GET http://localhost:8080/api/rating/lightsOff/n
+
+### GET 10 most reacent comments
+GET http://localhost:8080/api/comment/lightsOff
