@@ -13,7 +13,12 @@ public class RatingServiceJPA implements RatingService{
     private EntityManager entityManager;
     @Override
     public void setRating(Rating rating) {
-        entityManager.merge(rating);
+        try {
+            entityManager.persist(rating);
+        } catch (Exception e) {
+            // Handle unique constraint violation
+            throw new RuntimeException("Rating for player and game already exists");
+        }
     }
 
     @Override

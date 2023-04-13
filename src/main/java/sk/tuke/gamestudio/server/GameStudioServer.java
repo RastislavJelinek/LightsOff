@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import sk.tuke.gamestudio.service.*;
-
 @SpringBootApplication
 @Configuration
 @EntityScan("sk.tuke.gamestudio.entity")
@@ -24,4 +23,5 @@ public class GameStudioServer {
     }
     @Bean
     public CommentService commentService() {return new CommentServiceJPA();}
+
 }
