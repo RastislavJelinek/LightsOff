@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(name = "unique_rating", columnNames = {"player", "game"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"player", "game"})})
 @NamedQuery( name = "Rating.getRating",
         query = "SELECT r FROM Rating r WHERE r.game =: game AND r.player =: player ")
 @NamedQuery( name = "Rating.getAverageRating",

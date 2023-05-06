@@ -13,12 +13,14 @@ public class RatingServiceJPA implements RatingService{
     private EntityManager entityManager;
     @Override
     public void setRating(Rating rating) {
-        try {
-            entityManager.persist(rating);
-        } catch (Exception e) {
-            // Handle unique constraint violation
-            throw new RuntimeException("Rating for player and game already exists");
+        Rating rate = entityManager.createNamedQuery("Rating.getRating", Rating.class)
+            .setParameter("game", rating.getGame())
+            .setParameter("player", rating.getPlayer())
+            .getSingleResult();
+        if(rate != null){
+            rating.setIdent(rate.getIdent());
         }
+        entityManager.merge(rating);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class RatingServiceJPA implements RatingService{
             return game1.intValue();
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // or some other default value
+            return 0;
         }
     }
 
@@ -44,7 +46,7 @@ public class RatingServiceJPA implements RatingService{
             return rating.getRating();
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // or some other default value
+            return 0;
         }
 
     }
