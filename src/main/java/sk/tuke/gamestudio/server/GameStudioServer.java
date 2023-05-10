@@ -3,10 +3,12 @@ package sk.tuke.gamestudio.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import sk.tuke.gamestudio.service.*;
-@SpringBootApplication
+
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 @Configuration
 @EntityScan("sk.tuke.gamestudio.entity")
 public class GameStudioServer {
@@ -23,5 +25,7 @@ public class GameStudioServer {
     }
     @Bean
     public CommentService commentService() {return new CommentServiceJPA();}
+    @Bean
+    public PlayerServiceJPA playerService() {return new PlayerServiceJPA();}
 
 }

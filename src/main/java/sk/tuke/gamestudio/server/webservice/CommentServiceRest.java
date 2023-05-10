@@ -19,7 +19,7 @@ public class CommentServiceRest {
     }
 
     @GetMapping("/{game}")
-    public List<Comment> getTopScores(@PathVariable String game) {
+    public List<Comment> getRecentComments(@PathVariable String game) {
         return commentService.getComments(game);
     }
 

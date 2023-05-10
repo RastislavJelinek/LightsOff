@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Lights Off - Game Settings</title>
+    <link rel="stylesheet" href="../css/general/site.css">
+    <link rel="stylesheet" href="../css/gameSettings.css">
+</head>
+<body>
+    <div id="menuBar"></div>
+    <script>
+        $(document).ready(function() {
+            $('#menuBar').load('../html/menuBar.html');
+        });
+    </script>
+    <div>
+        <label for="numSelector">Grid size:</label>
+        <input type="number" id="numSelector" name="numSelector" min="3" max="10" value="5">
+    </div>
+    <div>
+        <button id="classicBtn" class="active">Classic</button>
+        <button id="fancyBtn">Fancy</button>
+    </div>
+</body>
+</html>

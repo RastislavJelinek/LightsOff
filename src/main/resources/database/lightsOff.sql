@@ -26,3 +26,10 @@ create table score
     player    varchar(255),
     points    integer not null
 );
+
+create table player
+(
+    ident     integer not null primary key,
+    username    varchar(255) not null unique,
+    userpassword    varchar(255) not null
+);
