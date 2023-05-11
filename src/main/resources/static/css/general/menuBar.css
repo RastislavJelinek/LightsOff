@@ -4,6 +4,7 @@
     left: 0;
     width: 100%;
     background-color: #333;
+    z-index: 999; /* Set a high z-index value */
 }
 
 #menuBar ul {

@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Lights Off - Menu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/general/site.css">
     <link rel="stylesheet" href="../css/general/generalMenu.css">
 </head>
 <body onpageshow="showMenu()">
     <div id="header">
-        <span>Lights </span><img id="bulb" src="../images/bulbOnYellow.png" alt="bulbOnYellow" class=""/><span id="ff"> ff</span>
+        <span>Lights</span><img id="bulb" src="../images/bulbOnYellow.png" alt="bulbOnYellow" class=""/><span id="ff"> ff</span>
     </div>
     <div id="menu">
         <a id="login" onclick="login()">Login</a>
         <a onclick="newGame()">New Game</a>
         <a onclick="continueGame()">Continue Game</a>
         <a onclick="showScoreBoard()">Score board</a>
-        <a onclick="showComents()">Comments</a>
+        <a onclick="showComments()">Comments</a>
         <a onclick="showCredits()">Credits</a>
-        <a id="rating"></a>
+        <a id="rating" onclick="showRatingDialog()"></a>
     </div>
     <script src="../js/menu.js"></script>
 </body>

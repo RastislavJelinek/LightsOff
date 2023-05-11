@@ -5,7 +5,6 @@ import sk.tuke.gamestudio.entity.Player;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Transactional
 public class PlayerServiceJPA implements PlayerService{
@@ -14,10 +13,16 @@ public class PlayerServiceJPA implements PlayerService{
     private EntityManager entityManager;
 
     @Override
-    public Optional<Player> getPlayer(Player player) {
-        return Optional.ofNullable(entityManager.createNamedQuery("Player.getPassword", Player.class)
-                .setParameter("username", player.getUsername())
-                .getSingleResult());
+    public Player getPlayer(Player player) {
+        try {
+            return entityManager.createNamedQuery("Player.getPassword", Player.class)
+                    .setParameter("username", player.getUsername())
+                    .getSingleResult();
+        }catch (PlayerException e){
+            throw new PlayerException("hráč sa nenašiel");
+        }
+
+
     }
 
     @Override

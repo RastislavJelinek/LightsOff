@@ -5,29 +5,47 @@
   <title>Scoreboard</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/general/site.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <style>
+    .table {
+      background-color: #000000;
+      color: #ffffff;
+      border-collapse: separate;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .table thead {
+      background-color: #123d00;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #171717;
+    }
+
+    .table tbody td {
+      font-size: 14px;
+    }
+
+  </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
       $.getJSON("/scoreboard", function(data) {
-        var table = '<table class=\'table\'><thead><tr><th>Player</th><th>Points</th><th>Date</th></tr></thead><tbody>';
-        for (var i = 0; i < data.length; i++) {
-          table += "<tr><td>" + data[i].player + "</td><td>" + data[i].points + "</td><td>" + new Date(data[i].playedOn).toLocaleDateString() + "</td></tr>";
+        let table = '<table class="table"><thead><tr><th>Player</th><th>Points</th><th>Date</th></tr></thead><tbody>';
+        for (let i = 0; i < data.length; i++) {
+          table += `<tr><td>${data[i].player}</td><td>${data[i].points}</td><td>${new Date(data[i].playedOn).toLocaleDateString()}</td></tr>`;
         }
         table += "</tbody></table>";
         $("#scoreboardTable").html(table);
       });
     });
   </script>
-  <style>
-    table.table tbody tr td {
-      color: #fff;
-    }
-  </style>
 </head>
 <body>
 <div id="menuBar"></div>
 <div class="container">
-  <h1>Scoreboard</h1>
+  <h1>TOP 10 Scores</h1>
   <div id="scoreboardTable"></div>
 </div>
 <script>

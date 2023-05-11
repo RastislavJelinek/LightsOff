@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Player;
+import sk.tuke.gamestudio.entity.Rating;
 import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.lightsOff.core.Field;
+import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
 import sk.tuke.gamestudio.service.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -35,7 +34,9 @@ public class LightsOffController {
 
     public LightsOffController(PlayerService playerService, RatingService ratingService, CommentService commentService, ScoreService scoreService){
         player = new Player();
-        newGame();
+        Map<String, Integer> requestBody = new HashMap<>();
+        requestBody.put("number",9);
+        newGame(requestBody);
         this.playerService = playerService;
         this.scoreService = scoreService;
         this.ratingService = ratingService;
@@ -103,8 +104,16 @@ public class LightsOffController {
         return "game";
     }
     @PostMapping("/newGame")
-    public String newGame() {
-        field = new Field(9, 9);
+    public String newGame(@RequestBody Map<String, Integer> requestBody) {
+        int response = requestBody.get("number");
+        int number = 9;
+        if(field != null) {
+            number = field.getColumnCount();
+        }
+        if (response > 2 && response < 10) {
+            number = response;
+        }
+        field = new Field(number, number);
         field.nextLevel();
         field.generate();
         return "game";
@@ -135,6 +144,26 @@ public class LightsOffController {
         return ratingService.getRating("lightsOff",player.getUsername());
     }
 
+    @PostMapping("/setrating")
+    @ResponseBody
+    public void setRating(@RequestBody Map<String, Integer> requestBody) {
+        int rating = requestBody.get("rating");
+        try {
+            ratingService.setRating(new Rating("lightsOff", player.getUsername(), rating, new Date()));
+        } catch (OutOfRangeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @PostMapping("/addComment")
+    @ResponseBody
+    public void addComment(@RequestBody Map<String, String> requestBody) {
+        String username = requestBody.get("username");
+        String comment = requestBody.get("comment");
+        commentService.addComment(new Comment("lightsOff", username, comment, new Date()));
+    }
+
 
 
 
@@ -146,16 +175,16 @@ public class LightsOffController {
         if (username == null && password == null) {
             return false;
         }
-
-        Player k = new Player();
-        k.setUsername(username);
-        Optional<Player> password1 = playerService.getPlayer(k);
-        if(password1.isEmpty()){
+        Player player = new Player();
+        player.setUsername(username);
+        try {
+            Player PlayerPassword = playerService.getPlayer(player);
+            String hashedPassword = passwordGenerator.generateHashedPassword(password,PlayerPassword.getSalt());
+            this.player = player;
+            return Objects.equals(hashedPassword, PlayerPassword.getUserpassword());
+        }catch (Exception e){
             return false;
         }
-        String hashedPassword = passwordGenerator.generateHashedPassword(password,password1.get().getSalt());
-        player = k;
-        return Objects.equals(hashedPassword, password1.get().getUserpassword());
     }
 
 

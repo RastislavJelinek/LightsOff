@@ -2,9 +2,7 @@ package sk.tuke.gamestudio.service;
 
 import sk.tuke.gamestudio.entity.Player;
 
-import java.util.Optional;
-
 public interface PlayerService {
-     Optional<Player> getPlayer(Player player);
+     Player getPlayer(Player player) throws PlayerException;
      void createPlayer(Player player);
 }

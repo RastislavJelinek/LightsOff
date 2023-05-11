@@ -1,0 +1,20 @@
+
+
+#button {
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+}
+
+#commentsSection {
+    display: block;
+    position: relative;
+    vertical-align: middle;
+}
+a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
