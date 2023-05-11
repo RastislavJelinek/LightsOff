@@ -10,7 +10,9 @@ import sk.tuke.gamestudio.lightsOff.core.GameState;
 import sk.tuke.gamestudio.lightsOff.core.Tile;
 import sk.tuke.gamestudio.lightsOff.core.TileState;
 import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
-import sk.tuke.gamestudio.service.*;
+import sk.tuke.gamestudio.service.CommentService;
+import sk.tuke.gamestudio.service.RatingService;
+import sk.tuke.gamestudio.service.ScoreService;
 
 import java.util.Arrays;
 import java.util.Date;

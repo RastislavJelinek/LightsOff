@@ -6,10 +6,10 @@ import sk.tuke.gamestudio.lightsOff.core.Field;
 import sk.tuke.gamestudio.lightsOff.core.Tile;
 import sk.tuke.gamestudio.lightsOff.core.TileState;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static sk.tuke.gamestudio.lightsOff.core.GameState.PLAYING;
 import static sk.tuke.gamestudio.lightsOff.core.GameState.SOLVED;
 import static sk.tuke.gamestudio.lightsOff.math.MathUtil.inRange;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FieldTest {
     private final Field field = new Field(5, 5);

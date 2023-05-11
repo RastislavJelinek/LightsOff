@@ -7,10 +7,28 @@ import static sk.tuke.gamestudio.lightsOff.math.MathUtil.inRange;
 
 public class Field {
     private GameState state;
-    private final int rowCount,columnCount;
+    private int rowCount,columnCount;
     private int level;
     private int moveCounter;
-    private final Tile[][] map;
+    private Tile[][] map;
+
+    public void setState(GameState state) {
+        this.state = state;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setMoveCounter(int moveCounter) {
+        this.moveCounter = moveCounter;
+    }
+
+    public void setMap(Tile[][] map) {
+        this.map = map;
+    }
+
+    public Field(){}
 
     public Field(int rowCount, int columnCount){
         this.columnCount = columnCount;

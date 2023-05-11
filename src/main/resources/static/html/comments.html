@@ -4,26 +4,44 @@
   <meta charset="UTF-8">
   <title>Comments</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/general/site.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="../css/comments.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <style>
-    /* Style the comments block with shades of gray */
+
+    .card {
+      background-color: #171717FF;
+      color: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
     .card-header {
-      background-color: #3b3b3b;
+      background-color: #123d01;
+      color: #ffffff;
+      border-radius: 10px 10px 0 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #232323FF;
+        color: #fff;
+        font-family: sans-serif;
+        caret-color: transparent;
+
     }
 
-    /* Style the comment text with darker gray */
-    .card-body {
-      background-color: #505050;
-
-    }
   </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
       $.getJSON("/comments", function(data) {
-        var commentsList = '';
-        for (var i = 0; i < data.length; i++) {
-          commentsList += '<div class="card mb-3">';
+        let commentsList = '';
+        for (let i = 0; i < data.length; i++) {
+          commentsList += '<div class="card">';
           commentsList += '<div class="card-header"><b>' + data[i].player + '</b> commented on ' + new Date(data[i].commentedOn).toLocaleDateString() + '</div>';
           commentsList += '<div class="card-body"><p class="card-text">' + data[i].comment + '</p></div>';
           commentsList += '</div>';
@@ -34,15 +52,32 @@
   </script>
 </head>
 <body>
-<div id="menuBar"></div>
-<script>
-  $(document).ready(function() {
-    $('#menuBar').load('../html/menuBar.html');
-  });
-</script>
-<div class="container">
-  <h1>Comments</h1>
-  <div id="commentsList"></div>
-</div>
+
+    <div id="menuBar"></div>
+    <script>
+      $(document).ready(function() {
+        $('#menuBar').load('../html/menuBar.html');
+      });
+    </script>
+
+    <div class="container" id="commentsSection">
+      <h1>Comments</h1>
+      <div id="commentsList"></div>
+    </div>
+    <div>
+      <h2>Leave a Comment</h2>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+        </div>
+        <a id="button" onclick="addComment()">Submit</a>
+      </form>
+      <script src="../js/comments.js"></script>
+    </div>
 </body>
 </html>

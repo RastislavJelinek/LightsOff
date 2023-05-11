@@ -14,7 +14,9 @@ function showMenu() {
             .then(response => response.json())
             .then(data => {
                 if (data >= 0) {
-                    ratingElem.textContent = 'Your rating: ' + data;
+                    ratingElem.textContent = 'Thank you for your rating: ' + data;
+                }else{
+                    ratingElem.textContent = 'Please leave Us rating!';
                 }
             })
             .catch(error => console.error(error));
@@ -76,9 +78,64 @@ function showScoreBoard(){
         window.location.href = "/showScoreBoard";
     }, 1000);
 }
-function showComents(){
+function showComments(){
     hideMenu();
     setTimeout(function() {
         window.location.href = "/showComments";
     }, 1000);
+}
+
+const ratingDialog = document.createElement('div');
+ratingDialog.classList.add('rating-dialog');
+
+
+
+
+
+function showRatingDialog() {
+    ratingDialog.innerHTML = `
+        <h3>Please rate our website:</h3>
+        <div class="stars">
+            ${generateStarsHTML()}
+        </div>
+        <button onclick="submitRating()">Submit</button>
+    `;
+    document.body.appendChild(ratingDialog);
+}
+
+function generateStarsHTML() {
+    let starsHTML = '';
+    for (let i = 1; i <= 5; ++i) {
+        starsHTML += `
+            <input type="radio" id="star${i}" name="rating" value="${i}" />
+            <label class="star" for="star${i}"></label>
+        `;
+    }
+    return starsHTML;
+}
+
+function submitRating() {
+    const ratingInputs = ratingDialog.querySelectorAll('input[name="rating"]');
+    let ratingValue = null;
+    for (const input of ratingInputs) {
+        if (input.checked) {
+            ratingValue = input.value;
+            break;
+        }
+    }
+    if (ratingValue !== null) {
+        $.ajax({
+            type: "POST",
+            url: "/setrating",
+            contentType: "application/json",
+            data: JSON.stringify({ rating: ratingValue}),
+            success:  function() {
+                window.location.href = "/menu";
+            },
+            error: function() {
+            }
+        });
+    } else {
+        console.log('No rating selected.');
+    }
 }

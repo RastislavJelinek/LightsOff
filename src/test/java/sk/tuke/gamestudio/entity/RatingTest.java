@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import sk.tuke.gamestudio.lightsOff.math.OutOfRangeException;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 

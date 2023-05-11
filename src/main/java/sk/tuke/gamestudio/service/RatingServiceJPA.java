@@ -14,9 +14,9 @@ public class RatingServiceJPA implements RatingService{
     @Override
     public void setRating(Rating rating) {
         Rating rate = entityManager.createNamedQuery("Rating.getRating", Rating.class)
-            .setParameter("game", rating.getGame())
-            .setParameter("player", rating.getPlayer())
-            .getSingleResult();
+                .setParameter("game", rating.getGame())
+                .setParameter("player", rating.getPlayer())
+                .getSingleResult();
         if(rate != null){
             rating.setIdent(rate.getIdent());
         }
@@ -26,13 +26,12 @@ public class RatingServiceJPA implements RatingService{
     @Override
     public int getAverageRating(String game){
         try {
-            Double game1 = entityManager.createNamedQuery("Rating.getAverageRating", Double.class)
+            Double avgRating = entityManager.createNamedQuery("Rating.getAverageRating", Double.class)
                     .setParameter("game", game)
                     .getSingleResult();
-            return game1.intValue();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+            return avgRating.intValue();
+        } catch (RatingException e) {
+            throw new RatingException("problém získať priemerné skóre");
         }
     }
 
@@ -45,8 +44,7 @@ public class RatingServiceJPA implements RatingService{
                     .getSingleResult();
             return rating.getRating();
         } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+            throw new RuntimeException();
         }
 
     }

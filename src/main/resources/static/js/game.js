@@ -66,6 +66,7 @@ function newGame(){
         type: "POST",
         url: "/newGame",
         contentType: "application/json",
+        data: JSON.stringify({ number: 0}),
         success:  function() {
             game();
             document.getElementById("message").style.opacity = "0";
