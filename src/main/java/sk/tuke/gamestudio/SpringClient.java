@@ -2,7 +2,6 @@ package sk.tuke.gamestudio;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.WebApplicationType;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +12,6 @@ import sk.tuke.gamestudio.lightsOff.consoleUi.ConsoleUI;
 import sk.tuke.gamestudio.lightsOff.core.Field;
 import sk.tuke.gamestudio.service.*;
 
-@SpringBootApplication
 @Configuration
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX,
         pattern = "sk.tuke.gamestudio.server.*"))

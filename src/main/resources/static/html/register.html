@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Lights Off - Register</title>
+  <link rel="stylesheet" href="../css/general/site.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div id="menuBar"></div>
+<script>
+  $(document).ready(function() {
+    $('#menuBar').load('../html/menuBar.html');
+  });
+</script>
+
+<div id="error-message" class="error-message">Error: User with this name already exists</div>
+<div class="form-container">
+  <form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button id="button" onclick="register()">Sign Up</button>
+    <a href="../login">already have account? Login</a>
+  </form>
+  <script src="../js/register.js"></script>
+</div>
+</body>
+</html>

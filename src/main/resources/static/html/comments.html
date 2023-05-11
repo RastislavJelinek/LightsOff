@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/general/site.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Style the comments block with shades of gray */
+    .card-header {
+      background-color: #3b3b3b;
+    }
+
+    /* Style the comment text with darker gray */
+    .card-body {
+      background-color: #505050;
+
+    }
+  </style>
+  <script>
+    $(document).ready(function() {
+      $.getJSON("/comments", function(data) {
+        var commentsList = '';
+        for (var i = 0; i < data.length; i++) {
+          commentsList += '<div class="card mb-3">';
+          commentsList += '<div class="card-header"><b>' + data[i].player + '</b> commented on ' + new Date(data[i].commentedOn).toLocaleDateString() + '</div>';
+          commentsList += '<div class="card-body"><p class="card-text">' + data[i].comment + '</p></div>';
+          commentsList += '</div>';
+        }
+        $("#commentsList").html(commentsList);
+      });
+    });
+  </script>
+</head>
+<body>
+<div id="menuBar"></div>
+<script>
+  $(document).ready(function() {
+    $('#menuBar').load('../html/menuBar.html');
+  });
+</script>
+<div class="container">
+  <h1>Comments</h1>
+  <div id="commentsList"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+#bulb {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    z-index: 1;
+    height: 50%;
+    opacity: 1;
+}
+
+#bulb.clicked {
+    transform: translate(8%, -5%) scale(0.1);
+    opacity: 0;
+}

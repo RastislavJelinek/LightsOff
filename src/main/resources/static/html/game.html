@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Lights Off - Game</title>
+    <link rel="stylesheet" href="../css/game/game.css">
+    <link rel="stylesheet" href="../css/general/site.css">
+</head>
+<body onpageshow="game()">
+    <div id="menuBar"></div>
+    <script>
+        $(document).ready(function() {
+        $('#menuBar').load('../html/menuBar.html');
+        });
+    </script>
+
+    <div id="headerContainer">
+        <div id="header">
+            <span>Lights </span><img id="bulb" src="../images/bulbOnYellow.png" alt="bulbOnYellow" class=""/><span id="ff"> ff</span>
+        </div>
+        <div id="menu">
+            <a>Change game settings</a>
+            <a onclick="newGame()" >New game</a>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div id="gameMenu">
+            <div id="scoreboard">
+                <span id="level"></span>
+                <span id="score"></span>
+            </div>
+            <div id="message">
+                <span id="win-message">You won the game! -></span>
+                <a id="next-map-button" onclick="nextMap()" >Next map</a>
+            </div>
+        </div>
+        <table id="gameTable"></table>
+    </div>
+    <script src="../js/game.js"></script>
+</body>
+</html>

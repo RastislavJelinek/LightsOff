@@ -1,0 +1,33 @@
+#ff{
+    margin-left: -10px;
+}
+#header {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    z-index: 1;
+    font-size: 48px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+
+#bulb {
+    position: relative;
+    top: 10%;
+    margin-top: 15px; /* or any other value that suits your needs */
+    transition: opacity 1s ease-in-out;
+    height: 48px;
+    animation: pulse 1s infinite alternate;
+
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}

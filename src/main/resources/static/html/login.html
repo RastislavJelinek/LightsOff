@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Lights Off - Login</title>
+  <link rel="stylesheet" href="../css/general/site.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+  <div id="menuBar"></div>
+  <script>
+    $(document).ready(function() {
+      $('#menuBar').load('../html/menuBar.html');
+    });
+  </script>
+  <div class="form-container">
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button onclick="login()">Login</button>
+      <a href="../register">Sign Up</a>
+    </form>
+    <script src="../js/login.js"></script>
+  </div>
+</body>
+</html>
